@@ -3,13 +3,13 @@ import { getFirestore } from "firebase/firestore";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyB6CHEsDzTtbG_IKoVRgiU7TrVZFUJGX0M",
-  authDomain: "whatsapp-clone-e75fd.firebaseapp.com",
-  projectId: "whatsapp-clone-e75fd",
-  storageBucket: "whatsapp-clone-e75fd.appspot.com",
-  messagingSenderId: "308986002459",
-  appId: "1:308986002459:web:f61e6b41c491c766934cbe",
-  measurementId: "G-QGJLF5E6HG",
+  apiKey: "AIzaSyCGBN6BzvJpc2ggXWKxaCCJBErMKuZ66rc",
+  authDomain: "whatsgood-gnestrelado.firebaseapp.com",
+  projectId: "whatsgood-gnestrelado",
+  storageBucket: "whatsgood-gnestrelado.appspot.com",
+  messagingSenderId: "391582906611",
+  appId: "1:391582906611:web:bbacf37bb1b0b11bb01f86",
+  measurementId: "G-CCPVBFYX0G",
 };
 
 const firebaseApp = initializeApp(firebaseConfig);
