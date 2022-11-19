@@ -4,6 +4,10 @@
   flex-direction: column;
 }
 
+.chat__backBtn {
+  border: none;
+}
+
 .chat__header {
   display: flex;
   align-items: center;

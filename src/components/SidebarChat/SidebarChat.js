@@ -6,7 +6,7 @@ import db from "../../firebase";
 import { Link } from "react-router-dom";
 import { useStateValue } from "../../StateProvider";
 
-function SidebarChat({ id, name, addNewChat }) {
+function SidebarChat({ id, name, addNewChat, closeSidebar }) {
   const [seed, setSeed] = useState("");
   const [messages, setMessages] = useState("");
   const [{ user }] = useStateValue();
@@ -49,7 +49,7 @@ function SidebarChat({ id, name, addNewChat }) {
   };
 
   return !addNewChat ? (
-    <Link to={`/rooms/${id}`}>
+    <Link to={`/rooms/${id}`} onClick={closeSidebar}>
       <div className="sidebarChat">
         <div className="sidebarChat__container">
           <Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`} />

@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./Chat.css";
-import { AttachFile, InsertEmoticon, Mic, MoreVert, SearchOutlined } from "@mui/icons-material";
+import {
+  AttachFile,
+  InsertEmoticon,
+  Mic,
+  MoreVert,
+  SearchOutlined,
+  ArrowBackIos,
+} from "@mui/icons-material";
 import { Avatar, IconButton } from "@mui/material";
 import {
   query,
@@ -15,7 +22,7 @@ import { useParams } from "react-router-dom";
 import db from "../../firebase";
 import { useStateValue } from "../../StateProvider";
 
-function Chat() {
+function Chat({ isClosed, setIsClosed }) {
   const [input, setInput] = useState("");
   const [seed, setSeed] = useState("");
   const { roomId } = useParams();
@@ -61,9 +68,21 @@ function Chat() {
     return padTo2Digits(timestamp.getHours()) + ":" + padTo2Digits(timestamp.getMinutes());
   };
 
+  useEffect(() => {
+    const chat = document.getElementById("chat");
+    if (isClosed) {
+      chat.style.flex = "1";
+    }
+  }, [isClosed]);
+
   return (
-    <div className="chat">
+    <div id="chat" className="chat">
       <div className="chat__header">
+        {isClosed ? (
+          <button className="chat__backBtn" onClick={() => setIsClosed(false)}>
+            <ArrowBackIos />
+          </button>
+        ) : null}
         <Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`} />
         <div className="chat__headerInfo">
           <h3>{roomName}</h3>
