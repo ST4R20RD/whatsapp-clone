@@ -88,8 +88,10 @@ function Chat() {
               key={index}
               className={`chat__message ${message.userId === user.uid && "chat__receiver"}`}
             >
-              <span className="chat__name">{message.username}</span>
-              {message.message}
+              <span className="chat__messageContent">
+                <span className="chat__name">{message.username}</span>
+                {message.message}
+              </span>
               <span className="chat__timestamp">{date(message)}</span>
             </p>
           );
