@@ -52,16 +52,22 @@ function Chat() {
     setInput("");
   };
 
+  function padTo2Digits(num) {
+    return String(num).padStart(2, "0");
+  }
+
+  const date = (message) => {
+    const timestamp = new Date(message.timestamp?.toDate());
+    return padTo2Digits(timestamp.getHours()) + ":" + padTo2Digits(timestamp.getMinutes());
+  };
+
   return (
     <div className="chat">
       <div className="chat__header">
         <Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`} />
         <div className="chat__headerInfo">
           <h3>{roomName}</h3>
-          <p>
-            Last seen at{" "}
-            {new Date(messages[messages.length - 1]?.timestamp?.toDate()).toUTCString()}
-          </p>
+          <p>Tap for group info</p>
         </div>
         <div className="chat__headerRight">
           <IconButton>
@@ -84,9 +90,7 @@ function Chat() {
             >
               <span className="chat__name">{message.username}</span>
               {message.message}
-              <span className="chat__timestamp">
-                {new Date(message.timestamp?.toDate()).toUTCString()}
-              </span>
+              <span className="chat__timestamp">{date(message)}</span>
             </p>
           );
         })}

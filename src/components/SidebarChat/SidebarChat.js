@@ -4,10 +4,12 @@ import { Avatar } from "@mui/material";
 import { addDoc, collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import db from "../../firebase";
 import { Link } from "react-router-dom";
+import { useStateValue } from "../../StateProvider";
 
 function SidebarChat({ id, name, addNewChat }) {
   const [seed, setSeed] = useState("");
   const [messages, setMessages] = useState("");
+  const [{ user }] = useStateValue();
 
   useEffect(() => {
     if (id) {
@@ -32,14 +34,34 @@ function SidebarChat({ id, name, addNewChat }) {
     }
   };
 
+  function padTo2Digits(num) {
+    return String(num).padStart(2, "0");
+  }
+
+  const now = new Date();
+  const lastSeen = () => {
+    const timestamp = new Date(messages[0]?.timestamp?.toDate());
+    if (now.getDate() !== timestamp.getDate()) {
+      return timestamp.getDay() + "/" + timestamp.getMonth() + "/" + timestamp.getFullYear();
+    } else {
+      return padTo2Digits(timestamp.getHours()) + ":" + padTo2Digits(timestamp.getMinutes());
+    }
+  };
+
   return !addNewChat ? (
     <Link to={`/rooms/${id}`}>
       <div className="sidebarChat">
-        <Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`} />
-        <div className="sidebarChat__info">
-          <h2>{name}</h2>
-          <p>{messages[0]?.message}</p>
+        <div className="sidebarChat__container">
+          <Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`} />
+          <div className="sidebarChat__info">
+            <h2>{name}</h2>
+            <p>
+              {(messages[0]?.userId !== user.uid ? messages[0]?.username + ": " : "") +
+                messages[0]?.message}
+            </p>
+          </div>
         </div>
+        <div className="sidebarChat__lastSeen">{lastSeen()}</div>
       </div>
     </Link>
   ) : (
