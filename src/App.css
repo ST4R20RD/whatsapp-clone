@@ -11,5 +11,23 @@
   margin-top: -50px;
   height: 90vh;
   width: 90vw;
-  box-shadow: -1px 4px 20px -6px rgba(0,0,0,0.7);
+  box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.7);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: none;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(136, 136, 136, 0.5);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
