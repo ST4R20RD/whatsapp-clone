@@ -22,6 +22,10 @@ import { useParams } from "react-router-dom";
 import db from "../../firebase";
 import { useStateValue } from "../../StateProvider";
 
+const sameUserAsLastMsg = (messages, message, index) => {
+  return messages[index - 1].username === message.username;
+};
+
 function Chat({ isClosed, setIsClosed }) {
   const [input, setInput] = useState("");
   const [seed, setSeed] = useState("");
@@ -105,10 +109,18 @@ function Chat({ isClosed, setIsClosed }) {
           return (
             <p
               key={index}
-              className={`chat__message ${message.userId === user.uid && "chat__receiver"}`}
+              className={`chat__message ${message.userId === user.uid && "chat__receiver"} ${
+                index > 0 && sameUserAsLastMsg(messages, message, index) && "chat__sameUser"
+              }`}
             >
               <span className="chat__messageContent">
-                <span className="chat__name">{message.username}</span>
+                {index > 0 ? (
+                  !sameUserAsLastMsg(messages, message, index) && (
+                    <span className="chat__name">{message.username}</span>
+                  )
+                ) : (
+                  <span className="chat__name">{message.username}</span>
+                )}
                 {message.message}
               </span>
               <span className="chat__timestamp">{date(message)}</span>

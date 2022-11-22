@@ -52,12 +52,16 @@
   border-radius: 10px;
   width: fit-content;
   background-color: white;
-  margin-bottom: 30px;
+  margin-top: 30px;
 }
 
 .chat__messageContent {
   display: flex;
   flex-direction: column;
+}
+
+.chat__sameUser {
+  margin-top: 1px;
 }
 
 .chat__name {
