@@ -41,8 +41,11 @@ function SidebarChat({ id, name, addNewChat, closeSidebar }) {
   const now = new Date();
   const lastSeen = () => {
     const timestamp = new Date(messages[0]?.timestamp?.toDate());
-    if (now.getDate() !== timestamp.getDate()) {
-      return timestamp.getDay() + "/" + timestamp.getMonth() + "/" + timestamp.getFullYear();
+    const itWasTodayCheck =
+      now.toUTCString().substring(0, 11) === timestamp.toUTCString().substring(0, 11) &&
+      now.getFullYear() === timestamp.getFullYear();
+    if (!itWasTodayCheck) {
+      return timestamp.getDate() + "/" + (timestamp.getMonth() + 1) + "/" + timestamp.getFullYear();
     } else {
       return padTo2Digits(timestamp.getHours()) + ":" + padTo2Digits(timestamp.getMinutes());
     }
